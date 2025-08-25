@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz de Mantenimiento Preventivo</title>
+    <link href="/iconos/fixel.ico" type="fixel/x-icon" rel="shorcut icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Estado visual para la opción seleccionada */
+        .option {
+            transition: all .2s ease;
+        }
+
+        .option.selected {
+            background: #eff6ff;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, .35);
+        }
+
+        .option:hover {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+
+<body
+    class="min-h-screen bg-gradient-to-br from-sky-50 via-indigo-50 to-fuchsia-50 antialiased flex items-center justify-center p-6">
+    <div class="w-full max-w-5xl">
+        <!-- Card -->
+        <div class="bg-white/90 backdrop-blur rounded-3xl shadow-2xl ring-1 ring-black/5 overflow-hidden">
+            <!-- Header -->
+            <div class="p-8 md:p-10 border-b bg-white">
+                <h1 class="text-4xl font-extrabold text-center text-gray-900">
+                    <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Quiz de
+                        Mantenimiento Preventivo</span>
+                </h1>
+                <p class="text-center text-gray-600 mt-3">Responde las 10 preguntas (5 de mantenimiento físico y 5 de
+                    mantenimiento lógico).
+                </p>
+
+                <!-- Progreso -->
+                <div class="mt-6">
+                    <div class="flex items-center justify-between text-sm text-gray-600">
+                        <span>Progreso</span>
+                        <span><span id="progressCount" class="font-semibold">0</span>/10 respondidas</span>
+                    </div>
+                    <div class="mt-2 h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                        <div id="progressBar" class="h-2 w-0 bg-gradient-to-r from-blue-600 to-purple-600"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form id="quizForm" class="p-6 md:p-10 space-y-8">
+                <!-- Sección: Mantenimiento Físico -->
+                <section class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 md:p-8 rounded-2xl shadow-md">
+                    <h2 class="text-2xl font-bold mb-5 text-blue-800">Mantenimiento Físico 🛠️</h2>
+
+                    <!-- Q1 -->
+                    <div id="q1-container" class="mb-6 border-b border-blue-200 pb-5" data-question="q1">
+                        <p class="font-semibold text-lg mb-4 text-gray-800">1. ¿Qué se coloca entre el procesador y el disipador para que el calor fluya correctamente?</p>
+                        <div class="space-y-3">
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q1">
+                                <input type="radio" name="q1" value="a" class="h-4 w-4 text-blue-600" />
+                                <span class="ml-3">a) Alcohol isopropílico</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q1">
+                                <input type="radio" name="q1" value="b" class="h-4 w-4 text-blue-600" />
+                                <span class="ml-3">b) Pasta térmica</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q1">
+                                <input type="radio" name="q1" value="c" class="h-4 w-4 text-blue-600" />
+                                <span class="ml-3">c) Pasta adhesiva</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q1">
+                                <input type="radio" name="q1" value="d" class="h-4 w-4 text-blue-600" />
+                                <span class="ml-3">d) Cinta aislante</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div id="q2-container" class="mb-6 border-b border-blue-200 pb-5" data-question="q2">
+                        <p class="font-semibold text-lg mb-4 text-gray-800">2. ¿Qué componente interno suele acumular
+                            más polvo y debe limpiarse regularmente para evitar el sobrecalentamiento?</p>
+                        <div class="space-y-3">
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q2">
+                                <input type="radio" name="q2" value="a" class="h-4 w-4 text-blue-600" />
+                                <span class="ml-3">a) La memoria RAM</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q2">
+                                <input type="radio" name="q2" value="b" class="h-4 w-4 text-blue-600" />
+                                <span class="ml-3">b) El disco duro</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q2">
+                                <input type="radio" name="q2" value="c" class="h-4 w-4 text-blue-600" />
+                                <span class="ml-3">c) El ventilador (disipador) del CPU</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q2">
+                                <input type="radio" name="q2" value="d" class="h-4 w-4 text-blue-600" />
+                                <span class="ml-3">d) La fuente de poder</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div id="q3-container" class="mb-6 border-b border-blue-200 pb-5" data-question="q3">
+                        <p class="font-semibold text-lg mb-4 text-gray-800">3. ¿Con qué frecuencia se recomienda
+                            realizar una limpieza física general del interior del gabinete de una PC?</p>
+                        <div class="space-y-3">
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q3">
+                                <input type="radio" name="q3" value="a" class="h-4 w-4 text-blue-600" />
+                                <span class="ml-3">a) Cada 3 años</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q3">
+                                <input type="radio" name="q3" value="b" class="h-4 w-4 text-blue-600" />
+                                <span class="ml-3">b) Cada 6 meses</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q3">
+                                <input type="radio" name="q3" value="c" class="h-4 w-4 text-blue-600" />
+                                <span class="ml-3">c) Una vez al mes</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q3">
+                                <input type="radio" name="q3" value="d" class="h-4 w-4 text-blue-600" />
+                                <span class="ml-3">d) Solo cuando la computadora se sobrecalienta</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div id="q4-container" class="mb-6 border-b border-blue-200 pb-5" data-question="q4">
+                        <p class="font-semibold text-lg mb-4 text-gray-800">4. ¿La memoria RAM es un componente indispensable para que la PC inicie y muestre imagen en pantalla?</p>
+                        <div class="space-y-3">
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q4">
+                                <input type="radio" name="q4" value="a" class="h-4 w-4 text-blue-600" />
+                                <span class="ml-3">Verdadero</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q4">
+                                <input type="radio" name="q4" value="b" class="h-4 w-4 text-blue-600" />
+                                <span class="ml-3">Falso</span>
+                            </label>
+                            
+                        </div>
+                    </div>
+
+                    <!-- Q5 -->
+                    <div id="q5-container" class="mb-2" data-question="q5">
+                        <p class="font-semibold text-lg mb-4 text-gray-800">5. ¿Cuál es la función principal de la pulsera antiestática al trabajar con componentes de una computadora?</p>
+                        <div class="space-y-3">
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q5">
+                                <input type="radio" name="q5" value="a" class="h-4 w-4 text-blue-600" />
+                                <span class="ml-3">a) Aumentar la velocidad del procesador</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q5">
+                                <input type="radio" name="q5" value="b" class="h-4 w-4 text-blue-600" />
+                                <span class="ml-3">b) Mejorar la ventilación del gabinete</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q5">
+                                <input type="radio" name="q5" value="c" class="h-4 w-4 text-blue-600" />
+                                <span class="ml-3">c) Evitar descargas eléctricas que dañen los componentes</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q5">
+                                <input type="radio" name="q5" value="d" class="h-4 w-4 text-blue-600" />
+                                <span class="ml-3">d) Mejorar el rendimiento de la PC</span>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sección: Mantenimiento Lógico -->
+                <section class="bg-gradient-to-br from-purple-50 to-fuchsia-100 p-6 md:p-8 rounded-2xl shadow-md">
+                    <h2 class="text-2xl font-bold mb-5 text-purple-800">Mantenimiento Lógico 💾</h2>
+
+                    <!-- Q6 -->
+                    <div id="q6-container" class="mb-6 border-b border-purple-200 pb-5" data-question="q6">
+                        <p class="font-semibold text-lg mb-4 text-gray-800">6. Programa para bootear USB:</p>
+                        <div class="space-y-3">
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q6">
+                                <input type="radio" name="q6" value="a" class="h-4 w-4 text-purple-600" />
+                                <span class="ml-3">a) Microsoft Word</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q6">
+                                <input type="radio" name="q6" value="b" class="h-4 w-4 text-purple-600" />
+                                <span class="ml-3">b) Bloc de notas</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q6">
+                                <input type="radio" name="q6" value="c" class="h-4 w-4 text-purple-600" />
+                                <span class="ml-3">c) Rufus</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q6">
+                                <input type="radio" name="q6" value="d" class="h-4 w-4 text-purple-600" />
+                                <span class="ml-3">d) CCleaner</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Q7 -->
+                    <div id="q7-container" class="mb-6 border-b border-purple-200 pb-5" data-question="q7">
+                        <p class="font-semibold text-lg mb-4 text-gray-800">7. Actividad o actividades del Mantenimiento Lógico:</p>
+                        <div class="space-y-3">
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q7">
+                                <input type="radio" name="q7" value="a" class="h-4 w-4 text-purple-600" />
+                                <span class="ml-3">a) Reemplazar disco duro</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q7">
+                                <input type="radio" name="q7" value="b" class="h-4 w-4 text-purple-600" />
+                                <span class="ml-3">b) Cambiar fuente de poder</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q7">
+                                <input type="radio" name="q7" value="c" class="h-4 w-4 text-purple-600" />
+                                <span class="ml-3">c) Descargar Minecraft</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q7">
+                                <input type="radio" name="q7" value="d" class="h-4 w-4 text-purple-600" />
+                                <span class="ml-3">d) Borrar archivos temporales, eliminar virus, actualizar el sistema operativo y programas.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Q8 -->
+                    <div id="q8-container" class="mb-6 border-b border-purple-200 pb-5" data-question="q8">
+                        <p class="font-semibold text-lg mb-4 text-gray-800">8. ¿En el Mantenimiento Preventivo sólo se usan métodos Lógicos con uso de Software?</p>
+                        <div class="space-y-3">
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q8">
+                                <input type="radio" name="q8" value="a" class="h-4 w-4 text-purple-600" />
+                                <span class="ml-3">Verdadero</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q8">
+                                <input type="radio" name="q8" value="b" class="h-4 w-4 text-purple-600" />
+                                <span class="ml-3">Falso</span>
+                            </label>
+                            
+                        </div>
+                    </div>
+
+                    <!-- Q9 -->
+                    <div id="q9-container" class="mb-6 border-b border-purple-200 pb-5" data-question="q9">
+                        <p class="font-semibold text-lg mb-4 text-gray-800">9. ¿Qué comando se utiliza para eliminar archivos temporales?
+                        </p>
+                        <div class="space-y-3">
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q9">
+                                <input type="radio" name="q9" value="a" class="h-4 w-4 text-purple-600" />
+                                <span class="ml-3">a) %temp%</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q9">
+                                <input type="radio" name="q9" value="b" class="h-4 w-4 text-purple-600" />
+                                <span class="ml-3">b) cmd</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q9">
+                                <input type="radio" name="q9" value="c" class="h-4 w-4 text-purple-600" />
+                                <span class="ml-3">c) msinfo32</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q9">
+                                <input type="radio" name="q9" value="d" class="h-4 w-4 text-purple-600" />
+                                <span class="ml-3">d) control</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Q10 -->
+                    <div id="q10-container" class="mb-2" data-question="q10">
+                        <p class="font-semibold text-lg mb-4 text-gray-800">10. ¿Cuál de las siguientes acciones es
+                            parte del mantenimiento lógico preventivo?</p>
+                        <div class="space-y-3">
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q10">
+                                <input type="radio" name="q10" value="a" class="h-4 w-4 text-purple-600" />
+                                <span class="ml-3">a) Reemplazar la memoria RAM</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q10">
+                                <input type="radio" name="q10" value="b" class="h-4 w-4 text-purple-600" />
+                                <span class="ml-3">b) Reemplazar la fuente de poder</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q10">
+                                <input type="radio" name="q10" value="c" class="h-4 w-4 text-purple-600" />
+                                <span class="ml-3">c) Eliminación de archivos temporales</span>
+                            </label>
+                            <label class="option flex items-center p-3 border rounded-xl cursor-pointer"
+                                data-question="q10">
+                                <input type="radio" name="q10" value="d" class="h-4 w-4 text-purple-600" />
+                                <span class="ml-3">d) Limpiar el ventilador del CPU</span>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Acciones -->
+                <div class="pt-2">
+                    <button id="submitBtn" type="button" onclick="checkAnswers()" disabled
+                        class="w-full bg-gradient-to-r from-green-500 to-teal-600 text-white font-bold py-4 px-6 rounded-2xl shadow-lg transition transform disabled:opacity-60 disabled:cursor-not-allowed hover:scale-[1.01]">
+                        Enviar Respuestas
+                    </button>
+                </div>
+            </form>
+
+            <!-- Resultados -->
+            <div id="results" class="p-8 md:p-10 hidden border-t bg-white">
+                <h2 class="text-3xl font-bold text-center mb-4 text-gray-900">📊 Tus Resultados</h2>
+                <p id="score" class="text-xl text-center text-gray-700 mb-4"></p>
+                <div id="feedback" class="text-center text-base font-semibold"></div>
+                <button onclick="resetQuiz()"
+                    class="mt-6 w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-2xl shadow-md transition">
+                    Reintentar Quiz
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Respuestas correctas (manteniendo las originales)
+        const correctAnswers = {
+            q1: 'b',
+            q2: 'c',
+            q3: 'b',
+            q4: 'a',
+            q5: 'c',
+            q6: 'c',
+            q7: 'd',
+            q8: 'b',
+            q9: 'a',
+            q10: 'c'
+        };
+
+        const form = document.getElementById('quizForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const resultsDiv = document.getElementById('results');
+        const scoreDisplay = document.getElementById('score');
+        const feedbackDisplay = document.getElementById('feedback');
+        const progressCount = document.getElementById('progressCount');
+        const progressBar = document.getElementById('progressBar');
+
+        // Selección visual de opciones y progreso
+        const optionLabels = document.querySelectorAll('.option input[type="radio"]');
+        optionLabels.forEach((input) => {
+            input.addEventListener('change', (e) => {
+                const qName = e.target.name; // q1...q10
+                // Quitar selección visual previa dentro de ese bloque
+                const container = document.querySelector(`[data-question="${qName}"]`).parentElement;
+                container.querySelectorAll('.option').forEach(lbl => lbl.classList.remove('selected'));
+                // Agregar selección visual al label actual
+                e.target.closest('.option').classList.add('selected');
+                updateProgress();
+            });
+        });
+
+        function updateProgress() {
+            let answered = 0;
+            Object.keys(correctAnswers).forEach((qid) => {
+                const radios = form.elements[qid];
+                if (!radios) return;
+                if (radios.length) {
+                    for (let i = 0; i < radios.length; i++) {
+                        if (radios[i].checked) { answered++; break; }
+                    }
+                } else if (radios.checked) {
+                    answered++;
+                }
+            });
+            const total = Object.keys(correctAnswers).length;
+            progressCount.textContent = answered;
+            progressBar.style.width = `${(answered / total) * 100}%`;
+            submitBtn.disabled = answered !== total;
+        }
+
+        function checkAnswers() {
+            let score = 0;
+            let allAnswered = true;
+
+            // Verificar cada respuesta
+            for (const questionId in correctAnswers) {
+                const selectedOption = form.elements[questionId];
+                let userAnswer = '';
+                if (selectedOption) {
+                    for (let i = 0; i < selectedOption.length; i++) {
+                        if (selectedOption[i].checked) { userAnswer = selectedOption[i].value; break; }
+                    }
+                }
+                if (userAnswer === '') { allAnswered = false; break; }
+                if (userAnswer === correctAnswers[questionId]) score++;
+            }
+
+            if (!allAnswered) {
+                scoreDisplay.textContent = '';
+                feedbackDisplay.innerHTML = `<p class="text-red-600 font-bold">⚠️ Por favor, responde todas las preguntas.</p>`;
+                resultsDiv.classList.remove('hidden');
+                return;
+            }
+
+            // Mostrar resultado
+            scoreDisplay.textContent = `Obtuviste ${score} de ${Object.keys(correctAnswers).length} respuestas correctas.`;
+            const total = Object.keys(correctAnswers).length;
+            if (score === total) {
+                feedbackDisplay.innerHTML = `<p class="text-green-700 font-bold text-lg">🌟 ¡Excelente! Eres un experto en mantenimiento.</p>`;
+            } else if (score >= total / 2) {
+                feedbackDisplay.innerHTML = `<p class="text-yellow-700 font-bold text-lg">👍 ¡Buen trabajo! Sigue practicando.</p>`;
+            } else {
+                feedbackDisplay.innerHTML = `<p class="text-red-700 font-bold text-lg">📚 Necesitas repasar algunos conceptos. ¡No te rindas!</p>`;
+            }
+
+            resultsDiv.classList.remove('hidden');
+            form.classList.add('hidden');
+        }
+
+        function resetQuiz() {
+            form.reset();
+            document.querySelectorAll('.option').forEach(lbl => lbl.classList.remove('selected'));
+            resultsDiv.classList.add('hidden');
+            form.classList.remove('hidden');
+            feedbackDisplay.innerHTML = '';
+            // Reiniciar progreso
+            progressCount.textContent = '0';
+            progressBar.style.width = '0%';
+            submitBtn.disabled = true;
+        }
+    </script>
+</body>
+
+</html>
